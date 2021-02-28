@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import Footer from "./components/footer";
 import Header from "./components/header";
@@ -6,14 +7,20 @@ import TabContent2 from "./components/tab-content2";
 import TabContent3 from "./components/tab-content3";
 
 function App() {
+  const [activeTab, setActiveTab] = useState(1);
+
+  const onUpdateTab = (id) => {
+    setActiveTab(id);
+  };
+
   return (
     <div>
-      <Header />
+      <Header onUpdateTab={onUpdateTab} activeTab={activeTab} />
       <section className="tab-container">
         <div className="container">
-          <TabContent1 />
-          <TabContent2 />
-          <TabContent3 />
+          {activeTab === 1 && <TabContent1 />}
+          {activeTab === 2 && <TabContent2 />}
+          {activeTab === 3 && <TabContent3 />}
         </div>
       </section>
       <Footer />
